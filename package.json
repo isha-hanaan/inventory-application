@@ -1,0 +1,9 @@
+{
+  "name": "inventory-application",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "docker:up": "docker compose up --build",
+    "docker:down": "docker compose down"
+  }
+}
