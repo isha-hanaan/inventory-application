@@ -48,7 +48,7 @@ jobs:
 
       - name: Generate SBOM with Syft
         run: |
-          docker run --rm -v "${{ github.workspace }}:/project" -w /project anchore/syft:v0.93.0 syft . -o cyclonedx-json=sbom.json
+          docker run --rm -v "${{ github.workspace }}:/project" -w /project anchore/syft:v0.93.0 packages . -o cyclonedx-json=sbom.json
 
       - name: Upload SBOM artifact
         uses: actions/upload-artifact@v4
