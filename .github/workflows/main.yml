@@ -29,7 +29,7 @@ jobs:
 
       - name: Run KICS IaC scan
         run: |
-          docker run --rm -v "${{ github.workspace }}:/src" -w /src checkmarx/kics:latest scan -p /src --report-formats json --output /src/kics-report.json
+          docker run --rm -v "${{ github.workspace }}:/src" -w /src checkmarx/kics:latest scan -p /src --report-formats json -o /src --output-name kics-report
 
       - name: Upload KICS report
         uses: actions/upload-artifact@v4
