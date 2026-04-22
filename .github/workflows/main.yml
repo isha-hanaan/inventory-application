@@ -29,7 +29,7 @@ jobs:
       - name: Run KICS IaC scan
         continue-on-error: true
         run: |
-          docker run --rm -v "${{ github.workspace }}:/src" -w /src checkmarx/kics:latest scan -p /src --report-formats json -o /src --output-name kics-report --ignore-on-exit all
+          docker run --rm -v "${{ github.workspace }}:/src" -w /src ghcr.io/checkmarx/kics:latest scan -p /src --report-formats json -o /src --output-name kics-report --ignore-on-exit all
 
       - name: Upload KICS report
         if: always()
