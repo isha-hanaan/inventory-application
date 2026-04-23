@@ -1,0 +1,426 @@
+{
+	"kics_version": "v2.1.21",
+	"files_scanned": 4,
+	"lines_scanned": 118,
+	"files_parsed": 4,
+	"lines_parsed": 118,
+	"lines_ignored": 0,
+	"files_failed_to_scan": 0,
+	"queries_total": 73,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 2,
+		"INFO": 1,
+		"LOW": 5,
+		"MEDIUM": 15,
+		"TRACE": 0
+	},
+	"total_counter": 23,
+	"total_bom_resources": 0,
+	"start": "2026-04-22T13:06:46.461361109Z",
+	"end": "2026-04-22T13:06:47.412367533Z",
+	"paths": [
+		"/src"
+	],
+	"queries": [
+		{
+			"query_name": "Missing User Instruction",
+			"query_id": "fd54f200-402c-4333-a5a4-36ef6709af2f",
+			"query_url": "https://docs.docker.com/engine/reference/builder/#user",
+			"severity": "HIGH",
+			"platform": "Dockerfile",
+			"cwe": "250",
+			"risk_score": "7.7",
+			"cloud_provider": "COMMON",
+			"category": "Build Process",
+			"experimental": false,
+			"description": "Always set a user in the runtime stage of your Dockerfile. Without it, the container defaults to root, even if earlier build stages define a user.",
+			"description_id": "eb49caf6",
+			"files": [
+				{
+					"file_name": "frontend/Dockerfile",
+					"similarity_id": "f2a47911abd0a4cdb11ad8c71355dd83df9f69690746da7fcca7098e983b8834",
+					"line": 1,
+					"issue_type": "MissingAttribute",
+					"search_key": "FROM={{node:20-alpine}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "The 'Dockerfile' should contain the 'USER' instruction",
+					"actual_value": "The 'Dockerfile' does not contain any 'USER' instruction"
+				},
+				{
+					"file_name": "backend/Dockerfile",
+					"similarity_id": "6beb74ee14df359081307571fcba280ff6477ac3476a62e9f51e48d7215e0a29",
+					"line": 1,
+					"issue_type": "MissingAttribute",
+					"search_key": "FROM={{node:20-alpine}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "The 'Dockerfile' should contain the 'USER' instruction",
+					"actual_value": "The 'Dockerfile' does not contain any 'USER' instruction"
+				}
+			]
+		},
+		{
+			"query_name": "Container Capabilities Unrestricted",
+			"query_id": "ce76b7d0-9e77-464d-b86f-c5c48e03e22d",
+			"query_url": "https://docs.docker.com/compose/compose-file/compose-file-v3/#cap_add-cap_drop",
+			"severity": "MEDIUM",
+			"platform": "DockerCompose",
+			"cwe": "400",
+			"risk_score": "6.8",
+			"cloud_provider": "COMMON",
+			"category": "Resource Management",
+			"experimental": false,
+			"description": "Some capabilities are not needed in certain (or any) containers. Make sure that you only add capabilities that your container needs. Drop unnecessary capabilities as well.",
+			"description_id": "1ddab108",
+			"files": [
+				{
+					"file_name": "docker-compose.yml",
+					"similarity_id": "50b41d2c3bf7b160617c512854ad2bab446922c6e6aa55c0d6f744aef1f95ebc",
+					"line": 27,
+					"issue_type": "MissingAttribute",
+					"search_key": "services.mongo",
+					"search_line": 27,
+					"search_value": "",
+					"expected_value": "Docker compose file to have 'cap_drop' attribute",
+					"actual_value": "Docker compose file doesn't have 'cap_drop' attribute. Make sure your container only has necessary capabilities."
+				},
+				{
+					"file_name": "docker-compose.yml",
+					"similarity_id": "d2f96c94be9d96c21d063eecdd184f6dfc2d027bd432040d37b4f58bedddaba4",
+					"line": 16,
+					"issue_type": "MissingAttribute",
+					"search_key": "services.frontend",
+					"search_line": 16,
+					"search_value": "",
+					"expected_value": "Docker compose file to have 'cap_drop' attribute",
+					"actual_value": "Docker compose file doesn't have 'cap_drop' attribute. Make sure your container only has necessary capabilities."
+				},
+				{
+					"file_name": "docker-compose.yml",
+					"similarity_id": "895c0c1c3798397014e3f307d7755bd66df6deaaf1dd0719396486f526ba6a92",
+					"line": 3,
+					"issue_type": "MissingAttribute",
+					"search_key": "services.backend",
+					"search_line": 3,
+					"search_value": "",
+					"expected_value": "Docker compose file to have 'cap_drop' attribute",
+					"actual_value": "Docker compose file doesn't have 'cap_drop' attribute. Make sure your container only has necessary capabilities."
+				}
+			]
+		},
+		{
+			"query_name": "Container Traffic Not Bound To Host Interface",
+			"query_id": "451d79dc-0588-476a-ad03-3c7f0320abb3",
+			"query_url": "https://docs.docker.com/compose/compose-file/compose-file-v3/#ports",
+			"severity": "MEDIUM",
+			"platform": "DockerCompose",
+			"cwe": "693",
+			"risk_score": "5.2",
+			"cloud_provider": "COMMON",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "Incoming container traffic should be bound to a specific host interface",
+			"description_id": "909d1bcd",
+			"files": [
+				{
+					"file_name": "docker-compose.yml",
+					"similarity_id": "2a5a3f1398b1b90a67b4466385115fffdffffec52597b7be35ca3ac0a8c4c07f",
+					"line": 7,
+					"issue_type": "IncorrectValue",
+					"search_key": "services.backend.ports",
+					"search_line": 7,
+					"search_value": "",
+					"expected_value": "Docker compose file to have 'ports' attribute bound to a specific host interface.",
+					"actual_value": "Docker compose file doesn't have 'ports' attribute bound to a specific host interface"
+				},
+				{
+					"file_name": "docker-compose.yml",
+					"similarity_id": "583417e24ef138a4fd335badb1797425cc8da8fcd36be94419fc6c35b54b7816",
+					"line": 29,
+					"issue_type": "IncorrectValue",
+					"search_key": "services.mongo.ports",
+					"search_line": 29,
+					"search_value": "",
+					"expected_value": "Docker compose file to have 'ports' attribute bound to a specific host interface.",
+					"actual_value": "Docker compose file doesn't have 'ports' attribute bound to a specific host interface"
+				},
+				{
+					"file_name": "docker-compose.yml",
+					"similarity_id": "336dc481b52c28d0ec62d3a8ae1208fde530504f29d389919f52f6ecfa7228ea",
+					"line": 20,
+					"issue_type": "IncorrectValue",
+					"search_key": "services.frontend.ports",
+					"search_line": 20,
+					"search_value": "",
+					"expected_value": "Docker compose file to have 'ports' attribute bound to a specific host interface.",
+					"actual_value": "Docker compose file doesn't have 'ports' attribute bound to a specific host interface"
+				}
+			]
+		},
+		{
+			"query_name": "Healthcheck Not Set",
+			"query_id": "698ed579-b239-4f8f-a388-baa4bcb13ef8",
+			"query_url": "https://docs.docker.com/compose/compose-file/compose-file-v3/#healthcheck",
+			"severity": "MEDIUM",
+			"platform": "DockerCompose",
+			"cwe": "703",
+			"risk_score": "5.1",
+			"cloud_provider": "COMMON",
+			"category": "Availability",
+			"experimental": false,
+			"description": "Check containers periodically to see if they are running properly.",
+			"description_id": "449b7c5c",
+			"files": [
+				{
+					"file_name": "docker-compose.yml",
+					"similarity_id": "6e9531e3bd65e4124a309a31733b162b9437511390e488bac2fe2b0a2b3c0433",
+					"line": 3,
+					"issue_type": "MissingAttribute",
+					"search_key": "services.backend",
+					"search_line": 3,
+					"search_value": "",
+					"expected_value": "Healthcheck should be defined.",
+					"actual_value": "Healthcheck is not defined."
+				},
+				{
+					"file_name": "docker-compose.yml",
+					"similarity_id": "adae450f7384c1f094e7d78b36144302b5acacdd7191fad76af4939389cf5db9",
+					"line": 16,
+					"issue_type": "MissingAttribute",
+					"search_key": "services.frontend",
+					"search_line": 16,
+					"search_value": "",
+					"expected_value": "Healthcheck should be defined.",
+					"actual_value": "Healthcheck is not defined."
+				},
+				{
+					"file_name": "docker-compose.yml",
+					"similarity_id": "086ada1a2c7ff52bfcc96eb867f3ec4b7f363be877c2be2f2642dcac502ac230",
+					"line": 27,
+					"issue_type": "MissingAttribute",
+					"search_key": "services.mongo",
+					"search_line": 27,
+					"search_value": "",
+					"expected_value": "Healthcheck should be defined.",
+					"actual_value": "Healthcheck is not defined."
+				}
+			]
+		},
+		{
+			"query_name": "Memory Not Limited",
+			"query_id": "bb9ac4f7-e13b-423d-a010-c74a1bfbe492",
+			"query_url": "https://docs.docker.com/compose/compose-file/compose-file-v3/#resources",
+			"severity": "MEDIUM",
+			"platform": "DockerCompose",
+			"cwe": "770",
+			"risk_score": "5.5",
+			"cloud_provider": "COMMON",
+			"category": "Resource Management",
+			"experimental": false,
+			"description": "Memory limits should be defined for each container. This prevents potential resource exhaustion by ensuring that containers consume not more than the designated amount of memory",
+			"description_id": "8fcb9f7d",
+			"files": [
+				{
+					"file_name": "docker-compose.yml",
+					"similarity_id": "a00ab654a3296c54b049c5b9316cdfa07d486d6c7bd059cd814cfa38214d7baf",
+					"line": 16,
+					"issue_type": "MissingAttribute",
+					"search_key": "services.frontend",
+					"search_line": 16,
+					"search_value": "",
+					"expected_value": "'deploy.resources.limits.memory' should be defined",
+					"actual_value": "'deploy' is not defined"
+				},
+				{
+					"file_name": "docker-compose.yml",
+					"similarity_id": "241a00d2b518595a144bff116c7affeeff9e4314593b7233f730e213cc8fe186",
+					"line": 27,
+					"issue_type": "MissingAttribute",
+					"search_key": "services.mongo",
+					"search_line": 27,
+					"search_value": "",
+					"expected_value": "'deploy.resources.limits.memory' should be defined",
+					"actual_value": "'deploy' is not defined"
+				},
+				{
+					"file_name": "docker-compose.yml",
+					"similarity_id": "fc9be25f6cbbe99df42b81f28803a6fee95b52d6d924e5e718b3cb51f7d88274",
+					"line": 3,
+					"issue_type": "MissingAttribute",
+					"search_key": "services.backend",
+					"search_line": 3,
+					"search_value": "",
+					"expected_value": "'deploy.resources.limits.memory' should be defined",
+					"actual_value": "'deploy' is not defined"
+				}
+			]
+		},
+		{
+			"query_name": "Security Opt Not Set",
+			"query_id": "610e266e-6c12-4bca-9925-1ed0cd29742b",
+			"query_url": "https://docs.docker.com/compose/compose-file/compose-file-v3/#security_opt",
+			"severity": "MEDIUM",
+			"platform": "DockerCompose",
+			"cwe": "693",
+			"risk_score": "5.5",
+			"cloud_provider": "COMMON",
+			"category": "Resource Management",
+			"experimental": false,
+			"description": "Attribute 'security_opt' should be defined.",
+			"description_id": "83fb7a65",
+			"files": [
+				{
+					"file_name": "docker-compose.yml",
+					"similarity_id": "123ac74731283304769c4e6bbd174a6bd46b143a624f0d3b945935c6fbaf737e",
+					"line": 27,
+					"issue_type": "MissingAttribute",
+					"search_key": "services.mongo",
+					"search_line": 27,
+					"search_value": "",
+					"expected_value": "Docker compose file to have 'security_opt' attribute",
+					"actual_value": "Docker compose file does not have 'security_opt' attribute"
+				},
+				{
+					"file_name": "docker-compose.yml",
+					"similarity_id": "757f71dc81a680c81ba2fc7a49713bd5b70d5dfd990e451c5375e0d888eedd39",
+					"line": 3,
+					"issue_type": "MissingAttribute",
+					"search_key": "services.backend",
+					"search_line": 3,
+					"search_value": "",
+					"expected_value": "Docker compose file to have 'security_opt' attribute",
+					"actual_value": "Docker compose file does not have 'security_opt' attribute"
+				},
+				{
+					"file_name": "docker-compose.yml",
+					"similarity_id": "05104e69c6bdf70c2b8b97e1def23f0a527f71549a8e2bb31927f8886da89cb3",
+					"line": 16,
+					"issue_type": "MissingAttribute",
+					"search_key": "services.frontend",
+					"search_line": 16,
+					"search_value": "",
+					"expected_value": "Docker compose file to have 'security_opt' attribute",
+					"actual_value": "Docker compose file does not have 'security_opt' attribute"
+				}
+			]
+		},
+		{
+			"query_name": "Cpus Not Limited",
+			"query_id": "6b610c50-99fb-4ef0-a5f3-e312fd945bc3",
+			"query_url": "https://docs.docker.com/compose/compose-file/compose-file-v3/#resources",
+			"severity": "LOW",
+			"platform": "DockerCompose",
+			"cwe": "400",
+			"risk_score": "2.9",
+			"cloud_provider": "COMMON",
+			"category": "Resource Management",
+			"experimental": false,
+			"description": "CPU limits should be set because if the system has CPU time free, a container is guaranteed to be allocated as much CPU as it requests",
+			"description_id": "d58d94a1",
+			"files": [
+				{
+					"file_name": "docker-compose.yml",
+					"similarity_id": "637a14e0772da555f021225004984ec548b3cfa221eefdd04a5bda7e698fcfe9",
+					"line": 27,
+					"issue_type": "MissingAttribute",
+					"search_key": "services.mongo",
+					"search_line": 27,
+					"search_value": "",
+					"expected_value": "'deploy.resources.limits.cpus' should be defined",
+					"actual_value": "'deploy' is not defined"
+				},
+				{
+					"file_name": "docker-compose.yml",
+					"similarity_id": "5d2ee4b4cebb89fb9c99459e65c8a2095a95e689cf8850de1d30053b22b117a1",
+					"line": 3,
+					"issue_type": "MissingAttribute",
+					"search_key": "services.backend",
+					"search_line": 3,
+					"search_value": "",
+					"expected_value": "'deploy.resources.limits.cpus' should be defined",
+					"actual_value": "'deploy' is not defined"
+				},
+				{
+					"file_name": "docker-compose.yml",
+					"similarity_id": "ceaa512b8e2508e9c3e711a3c5e4153f6f4c74da1b58fb568c9596253fce7a87",
+					"line": 16,
+					"issue_type": "MissingAttribute",
+					"search_key": "services.frontend",
+					"search_line": 16,
+					"search_value": "",
+					"expected_value": "'deploy.resources.limits.cpus' should be defined",
+					"actual_value": "'deploy' is not defined"
+				}
+			]
+		},
+		{
+			"query_name": "Healthcheck Instruction Missing",
+			"query_id": "b03a748a-542d-44f4-bb86-9199ab4fd2d5",
+			"query_url": "https://docs.docker.com/engine/reference/builder/#healthcheck",
+			"severity": "LOW",
+			"platform": "Dockerfile",
+			"cwe": "710",
+			"risk_score": "3.6",
+			"category": "Insecure Configurations",
+			"experimental": false,
+			"description": "Ensure that HEALTHCHECK is being used. The HEALTHCHECK instruction tells Docker how to test a container to check that it is still working",
+			"description_id": "426121ee",
+			"files": [
+				{
+					"file_name": "backend/Dockerfile",
+					"similarity_id": "9c23852c1f5bc5fc969d7af93637d01edaa3eb01cbcb3900f6e4ae071f7c240c",
+					"line": 1,
+					"issue_type": "MissingAttribute",
+					"search_key": "FROM={{node:20-alpine}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "Dockerfile should contain instruction 'HEALTHCHECK'",
+					"actual_value": "Dockerfile doesn't contain instruction 'HEALTHCHECK'"
+				},
+				{
+					"file_name": "frontend/Dockerfile",
+					"similarity_id": "75555c38d3d846aab9ab2840835c2525f3726cf5b5f5d4a774c1d96ba07282ff",
+					"line": 1,
+					"issue_type": "MissingAttribute",
+					"search_key": "FROM={{node:20-alpine}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "Dockerfile should contain instruction 'HEALTHCHECK'",
+					"actual_value": "Dockerfile doesn't contain instruction 'HEALTHCHECK'"
+				}
+			]
+		},
+		{
+			"query_name": "Shared Volumes Between Containers",
+			"query_id": "8c978947-0ff6-485c-b0c2-0bfca6026466",
+			"query_url": "https://docs.docker.com/compose/compose-file/compose-file-v3/#volumes",
+			"severity": "INFO",
+			"platform": "DockerCompose",
+			"cwe": "693",
+			"risk_score": "0.0",
+			"cloud_provider": "COMMON",
+			"category": "Insecure Configurations",
+			"experimental": false,
+			"description": "Volumes shared between containers can cause data corruption or can be used to share malicious files between containers.",
+			"description_id": "574aa3ab",
+			"files": [
+				{
+					"file_name": "docker-compose.yml",
+					"similarity_id": "e7e10d2b44497020c59076c4b29e9aa716c09940af30fe556111a284e8101615",
+					"line": 32,
+					"issue_type": "IncorrectValue",
+					"search_key": "services.mongo.volumes",
+					"search_line": 32,
+					"search_value": "created-and-shared",
+					"expected_value": "There shouldn't be volumes created and shared between containers",
+					"actual_value": "Volume mongo-data created and shared between containers"
+				}
+			]
+		}
+	]
+}
